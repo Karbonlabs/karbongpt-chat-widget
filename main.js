@@ -1,1 +1,75 @@
-document.addEventListener("DOMContentLoaded",function(){const e="https://www.karbonlabs.in",t=!0,o=document.createElement("div");o.style.position="fixed",o.style.bottom="20px",o.style.right="20px",o.style.width="60px",o.style.height="60px",o.style.background="#2962ff",o.style.borderRadius="50%",o.style.cursor="pointer",o.style.zIndex="9998";const n=document.createElement("img");n.src=`${e}/static/chat.svg`,n.width=25,n.height=25,n.style.paddingLeft="17px",n.style.paddingTop="17px",n.style.zIndex="9999",o.appendChild(n),document.body.appendChild(o);const r=document.createElement("div");r.style.position="fixed",r.style.bottom="85px",r.style.right="20px",r.style.width="400px",r.style.height="600px",r.style.background="white",r.style.border="1px solid #ccc",r.style.borderTopLeftRadius="10px",r.style.borderTopRightRadius="10px",r.style.borderBottomLeftRadius="10px",r.style.borderBottomRightRadius="10px",r.style.display="none",r.style.overflow="hidden",r.style.zIndex="9997",document.body.appendChild(r),o.addEventListener("click",function(){if("none"===r.style.display){r.style.display="block",n.src=`${e}/static/close-chat.svg`;const o=window.parent,n=o.innerWidth;o.innerWidth<600&&(r.style.width=`${n-40}px`),t&&(r.innerHTML='<iframe src="https://www.karbonlabs.in/embed/karbongpt" style="position:absolute;width:100% !important;height:100% !important;"></iframe>')}else n.src=`${e}/static/chat.svg`,r.style.display="none",t=!1})});
+
+document.addEventListener('load', function () {
+
+    const domain_url = 'https://www.karbonlabs.in';
+    let first_time_load = true;
+
+    const chatIcon = document.createElement('div');
+    chatIcon.style.position = 'fixed';
+    chatIcon.style.bottom = '20px';
+    chatIcon.style.right = '20px';
+    chatIcon.style.width = '60px';
+    chatIcon.style.height = '60px';
+    chatIcon.style.background = '#2962ff';
+    chatIcon.style.borderRadius = '50%';
+    chatIcon.style.cursor = 'pointer';
+    chatIcon.style.zIndex = '9998';
+
+    const chatIconImg = document.createElement('img');
+    chatIconImg.src = `${domain_url}/static/chat.svg`;
+    chatIconImg.width = 25;
+    chatIconImg.height = 25;
+    chatIconImg.style.paddingLeft = '17px';
+    chatIconImg.style.paddingTop = '17px';
+    chatIconImg.style.zIndex = '9999';
+    chatIcon.appendChild(chatIconImg);
+    document.body.appendChild(chatIcon);
+
+    const chatWidget = document.createElement('div');
+    chatWidget.style.position = 'fixed';
+    chatWidget.style.bottom = '85px';
+    chatWidget.style.right = '20px';
+    chatWidget.style.width = '400px';
+    chatWidget.style.height = '600px';
+    chatWidget.style.background = 'white';
+    chatWidget.style.border = '1px solid #ccc';
+    chatWidget.style.borderTopLeftRadius = '10px';
+    chatWidget.style.borderTopRightRadius = '10px';
+    chatWidget.style.borderBottomLeftRadius = '10px';
+    chatWidget.style.borderBottomRightRadius = '10px';
+    chatWidget.style.display = 'none';
+    chatWidget.style.overflow = 'hidden';
+    chatWidget.style.zIndex = '9997';
+    document.body.appendChild(chatWidget);
+
+    chatIcon.addEventListener('click', function () {
+
+        if (chatWidget.style.display === 'none') {
+            // show chatwidget
+            chatWidget.style.display = 'block';
+            chatIconImg.src = `${domain_url}/static/close-chat.svg`;
+
+            // resize chatwidget
+            const parentWindow = window.parent;
+            const parentWidth = parentWindow.innerWidth;
+            if (parentWidth < 600) {
+                chatWidget.style.width = `${parentWidth - 40}px`
+            }
+
+            if (first_time_load) {
+                const chatIframe = document.createElement('iframe');
+                chatIframe.src = `${domain_url}/embed/karbongpt`;
+                chatIframe.style.position = 'absolute'
+                chatIframe.style.width = `100 % !important`;
+                chatIframe.style.height = `100 % !important`;
+                chatWidget.appendChild(chatIframe);
+            }
+
+        } else {
+            chatIconImg.src = `${domain_url}/static/chat.svg`;
+            chatWidget.style.display = 'none';
+        }
+
+        first_time_load = false
+    });
+});
